@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: smart_delivery
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/smart_delivery
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 8080
