@@ -1,4 +1,4 @@
-package br.com.javadevweek.smartdelivery;
+package br.com.javadevweek.smartdelivery.integrations;
 
 public class ViaCepDTO {
     private String cep;

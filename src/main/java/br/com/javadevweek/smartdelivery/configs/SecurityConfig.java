@@ -1,4 +1,4 @@
-package br.com.javadevweek.smartdelivery;
+package br.com.javadevweek.smartdelivery.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

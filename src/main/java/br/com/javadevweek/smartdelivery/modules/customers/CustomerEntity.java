@@ -1,4 +1,4 @@
-package br.com.javadevweek.smartdelivery;
+package br.com.javadevweek.smartdelivery.modules.customers;
 
 import java.util.UUID;
 
@@ -25,12 +25,14 @@ public class CustomerEntity {
     private String phone;
     private String address;
     private String password;
+    private String zipCode;
 
     public CustomerEntity() {}
 
-    public CustomerEntity(String name, String email, String address, String phone, String password) {
+    public CustomerEntity(String name, String email, String address, String zipCode, String phone, String password) {
         this.name = name;
         this.address = address;
+        this.zipCode = zipCode;
         this.phone = phone;
         this.email = email;
         this.password = password;
@@ -68,6 +70,14 @@ public class CustomerEntity {
         this.address = address;
     }
 
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -91,6 +101,7 @@ public class CustomerEntity {
             "phone='" + phone + '\'' +
             "address='" + address + '\'' +
             "email='" + email + '\'' +
+            "zipCode='" + zipCode + '\'' +
             "password='" + password + '\'' +
             '}';
 
