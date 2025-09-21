@@ -2,6 +2,7 @@ package br.com.javadevweek.smartdelivery;
 
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,10 +18,15 @@ public class CustomerEntity {
     private UUID id;
 
     private String name;
+
+    @Column(unique = true)
     private String email;
+    
     private String phone;
     private String address;
     private String password;
+
+    public CustomerEntity() {}
 
     public CustomerEntity(String name, String email, String address, String phone, String password) {
         this.name = name;
@@ -30,8 +36,6 @@ public class CustomerEntity {
         this.password = password;
     }
 
-    public CustomerEntity() {}
-    
     public String getName() {
         return name;
     }
