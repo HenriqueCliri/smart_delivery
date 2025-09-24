@@ -4,17 +4,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import br.com.javadevweek.smartdelivery.integrations.ViaCepDTO;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import br.com.javadevweek.smartdelivery.modules.users.CreateUserUseCase;
+import br.com.javadevweek.smartdelivery.modules.users.Role;
 import jakarta.transaction.Transactional;
 
 @Service
 public class CreateCustomerUseCase {
 
     private CustomerRepository customerRepository;
+    private CreateUserUseCase createUserUseCase;
 
-    public CreateCustomerUseCase(CustomerRepository customerRepository) {
+    public CreateCustomerUseCase(CustomerRepository customerRepository, CreateUserUseCase createUserUseCase) {
         this.customerRepository = customerRepository;
+        this.createUserUseCase = createUserUseCase;
     }
 
     private final RestTemplate restTemplate = new RestTemplate();
@@ -29,6 +31,8 @@ public class CreateCustomerUseCase {
         } catch (Exception e) {
             throw new IllegalArgumentException("Error to search CEP " + customerEntity.getZipCode());
         }
+
+        this.createUserUseCase.execute(customerEntity.getEmail(), customerEntity.getPassword(), Role.CUSTOMER);
 
         customerRepository.findByEmail(customerEntity.getEmail())
             .ifPresent(

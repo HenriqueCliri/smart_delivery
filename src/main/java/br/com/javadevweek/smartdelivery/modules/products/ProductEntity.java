@@ -48,11 +48,20 @@ public class ProductEntity {
         this.price = price;
     }
 
-        public int getCode() {
+    public int getCode() {
         return code;
     }
 
     public void setCode(int code) {
         this.code = code;
     }
+    
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
 }

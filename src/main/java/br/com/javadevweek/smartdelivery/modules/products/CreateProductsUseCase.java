@@ -22,5 +22,6 @@ public class CreateProductsUseCase {
         
         ProductEntity productEntity = ProductMapper.requestToEntity(createProductRequest);
         this.productsRepository.save(productEntity);
+        return ProductMapper.entityToResponse(productEntity);
     };
 }

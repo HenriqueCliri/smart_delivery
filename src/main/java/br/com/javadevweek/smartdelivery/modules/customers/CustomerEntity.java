@@ -1,13 +1,7 @@
 package br.com.javadevweek.smartdelivery.modules.customers;
-
+import br.com.javadevweek.smartdelivery.modules.users.UserEntity;
+import jakarta.persistence.*;
 import java.util.UUID;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Table(name = "customers")
 @Entity
@@ -24,18 +18,24 @@ public class CustomerEntity {
     
     private String phone;
     private String address;
-    private String password;
     private String zipCode;
+
+    @Column(name = "user_id")
+    private UUID userId;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private UserEntity user;
 
     public CustomerEntity() {}
 
-    public CustomerEntity(String name, String email, String address, String zipCode, String phone, String password) {
+    public CustomerEntity(String name, String email, String address, String zipCode, String phone, UUID userId) {
         this.name = name;
         this.address = address;
         this.zipCode = zipCode;
         this.phone = phone;
         this.email = email;
-        this.password = password;
+        this.userId = userId;
     }
 
     public String getName() {
@@ -78,14 +78,6 @@ public class CustomerEntity {
         this.zipCode = zipCode;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public UUID getId() {
         return id;
     }
@@ -94,17 +86,11 @@ public class CustomerEntity {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-            return "CustomerEntity{" +
-            "name='" + name + '\'' +
-            "phone='" + phone + '\'' +
-            "address='" + address + '\'' +
-            "email='" + email + '\'' +
-            "zipCode='" + zipCode + '\'' +
-            "password='" + password + '\'' +
-            '}';
+    public UUID getUserId() {
+        return userId;
+    }
 
-
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 }
